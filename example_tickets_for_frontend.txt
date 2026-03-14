@@ -1,0 +1,85 @@
+Frontend Demo Tickets 
+
+Steps to Submit from React UI:
+1. Open → http://localhost:3000
+2. Click → "Submit Ticket" in sidebar
+3. Fill the form fields below
+4. Click → "🚀 DEPLOY TO AI PIPELINE"
+5. Watch the AI animation!
+6. See the result card appear
+
+sample tickets
+
+
+TICKET 1 — AUTO RESOLVE Demo
+FieldValueTitleCannot connect to office WiFiDescriptionMy laptop is not connecting to the office WiFi since morning. Other devices nearby are working fine. I have tried restarting my laptop and forgetting the network but still cannot connect.Priority🟡 MEDIUMEmailrajesh.kumar@company.com
+Expected Result:
+
+✅ GREEN BANNER → AUTO RESOLVED BY AI
+Category  → network
+Confidence → 85%+
+Solution  → Step by step fix shown
+
+👤 TICKET 2 — HUMAN CONFIRM Demo
+FieldValueTitleLaptop extremely slow and freezingDescriptionMy laptop takes 15 minutes to boot up every morning. Applications freeze randomly throughout the day. This issue started one week ago. I have tried restarting multiple times but the problem keeps coming back.Priority🟠 HIGHEmaildeepa.nair@company.com
+Expected Result:
+🟡 AMBER BANNER → SENT FOR HUMAN REVIEW
+Category   → performance
+Confidence → 60-84%
+Solution   → AI suggests but needs human
+
+🚨 TICKET 3 — ESCALATE Demo
+FieldValueTitleRansomware warning on my screenDescriptionMy computer is showing a ransom message saying all my files are encrypted and demanding Bitcoin payment within 24 hours. I have immediately disconnected my laptop from the network. Need urgent help right now.Priority🔴 CRITICALEmailaffected.user@company.com
+Expected Result:
+🔴 RED BANNER → ESCALATED TO HUMAN AGENT
+Category   → other/security
+Confidence → below 60%
+Reason     → Critical security issue
+
+🌀 TICKET 4 — Fun Unusual Demo
+FieldValueTitleCoffee machine not workingDescriptionThe coffee machine near the IT department on 3rd floor stopped working since yesterday morning. The entire IT team runs on coffee. Team morale and productivity are severely impacted. Please fix immediately.Priority🟢 LOWEmailcaffeine.addict@company.com
+Expected Result:
+Shows AI still processes non-IT tickets!
+Category   → other
+Confidence → varies
+
+
+
+Full Demo Script for Jury:
+Step 1 — Open Frontend:
+http://localhost:3000
+Step 2 — Click Submit Ticket in sidebar
+Step 3 — Fill Ticket 1 (WiFi) and submit
+Say: "Watch the AI pipeline animation..."
+Point to: Loading steps animation
+Then: GREEN auto resolve banner appears!
+Step 4 — Fill Ticket 3 (Ransomware) and submit
+Say: "Now watch what happens with a critical security issue..."
+Point to: RED escalate banner
+Say: "AI knows this needs human expertise!"
+Step 5 — Go to Ticket Queue page
+Say: "Here agents can see all tickets with AI decisions,
+confidence scores and full explanations..."
+Click any ticket → Show AI solution panel
+Step 6 — Go to Analytics page
+Say: "Real time analytics showing AI efficiency,
+confidence distribution and HITL metrics..."
+Point to: Charts and HITL cards
+
+
+One Liner for Each Ticket:
+Ticket 1 WiFi:
+
+"Simple known issue — AI confidence is above 85% so it auto resolves without any human!"
+
+Ticket 2 Slow laptop:
+
+"Medium confidence — AI suggests a solution but flags it for human confirmation!"
+
+Ticket 3 Ransomware:
+
+"Critical security issue — AI immediately escalates to human. This is the HITL system protecting the enterprise!"
+
+Ticket 4 Coffee machine:
+
+"Even non-IT tickets are handled gracefully — AI classifies it as other category and processes it!"

@@ -1,0 +1,97 @@
+some tickets to run in the backend 
+ steps to follow 
+ Step 1 — Open This Link in Browser:
+                            http://127.0.0.1:8000/docs
+
+Step 2 — Click on "Tickets" Section
+
+Step 3 — Click POST /tickets/
+
+Step 4 — Click "Try it out" button (top right)
+
+Step 5 — Delete the existing text in the box and paste the following tickets
+
+⚡ AUTO RESOLVE Tickets
+Ticket 1:
+json{
+  "title": "Cannot connect to VPN",
+  "description": "I am unable to connect to the company VPN from home. It keeps timing out after entering my credentials. Was working fine yesterday. I have tried restarting my laptop but the issue persists.",
+  "priority": "low",
+  "submitted_by": "rahul.sharma@company.com"
+}
+Ticket 2:
+json{
+  "title": "Printer showing offline",
+  "description": "The printer on 2nd floor is showing offline. Print jobs are stuck in the queue. Multiple employees are unable to print. I have tried turning it off and on but it still shows offline.",
+  "priority": "low",
+  "submitted_by": "priya.patel@company.com"
+}
+Ticket 3:
+json{
+  "title": "Need access to shared drive",
+  "description": "I recently joined the Marketing team and need access to the Marketing shared folder on the network drive. My manager has already approved the request.",
+  "priority": "low",
+  "submitted_by": "amit.kumar@company.com"
+}
+Ticket 4:
+json{
+  "title": "Adobe Reader installation required",
+  "description": "Please install Adobe Acrobat Reader on my workstation. I need it to open and read PDF documents sent by clients daily.",
+  "priority": "low",
+  "submitted_by": "neha.singh@company.com"
+}
+Ticket 5:
+json{
+  "title": "Outlook not opening",
+  "description": "Microsoft Outlook is not opening on my laptop. It crashes immediately with a license error. I need my emails urgently for client communication.",
+  "priority": "low",
+  "submitted_by": "vikram.joshi@company.com"
+}
+
+👤 HUMAN CONFIRM Tickets
+Ticket 6:
+json{
+  "title": "Laptop running very slow",
+  "description": "My laptop has become extremely slow over the past week. It takes 10 minutes to boot and applications freeze randomly. I have tried restarting multiple times but the issue continues.",
+  "priority": "medium",
+  "submitted_by": "deepa.nair@company.com"
+}
+Ticket 7:
+json{
+  "title": "VPN keeps disconnecting every 10 minutes",
+  "description": "Company VPN disconnects every 10 minutes while I am working from home. Reconnecting works temporarily but it disconnects again. This is affecting my productivity severely.",
+  "priority": "high",
+  "submitted_by": "suresh.reddy@company.com"
+}
+Ticket 8:
+json{
+  "title": "Company email not syncing on iPhone",
+  "description": "My work emails stopped syncing on my iPhone 3 days ago. I get an authentication error when trying to refresh. I have tried removing and adding the account but same issue.",
+  "priority": "medium",
+  "submitted_by": "ananya.iyer@company.com"
+}
+
+🚨 ESCALATE TO HUMAN Tickets
+Ticket 9:
+json{
+  "title": "Suspected unauthorized access to company portal",
+  "description": "I noticed multiple failed login attempts on my company portal account from unknown IP addresses located in different countries at 3AM. I am concerned my account may be compromised.",
+  "priority": "critical",
+  "submitted_by": "security.alert@company.com"
+}
+Ticket 10:
+json{
+  "title": "Entire office network is down",
+  "description": "All 50 employees on floor 3 have lost internet and internal network access since 9AM today. No one can access any company systems or internet. Business operations are completely halted.",
+  "priority": "critical",
+  "submitted_by": "it.emergency@company.com"
+}
+
+🌀 FUNNY / UNUSUAL Tickets
+Ticket 11:
+json{
+  "title": "Coffee machine near IT desk not working",
+  "description": "The coffee machine near the IT department on 3rd floor stopped working since yesterday morning. This is extremely urgent as the entire IT team runs on coffee. Please fix ASAP.",
+  "priority": "low",
+  "submitted_by": "caffeine.addict@company.com"
+}
