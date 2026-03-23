@@ -3,16 +3,20 @@ Frontend Demo Tickets
 Steps to Submit from React UI:
 1. Open → http://localhost:3000
 2. Click → "Submit Ticket" in sidebar
-3. Fill the form fields below
+3. Fill the form fields below 
 4. Click → "🚀 DEPLOY TO AI PIPELINE"
 5. Watch the AI animation!
 6. See the result card appear
 
-sample tickets
+                                                                  some sample tickets
 
 
 TICKET 1 — AUTO RESOLVE Demo
-FieldValueTitleCannot connect to office WiFiDescriptionMy laptop is not connecting to the office WiFi since morning. Other devices nearby are working fine. I have tried restarting my laptop and forgetting the network but still cannot connect.Priority🟡 MEDIUMEmailrajesh.kumar@company.com
+Field Value Title : Cannot connect to office WiFi
+Description : My laptop is not connecting to the office WiFi since morning. Other devices nearby are working fine. 
+                 I have tried restarting my laptop and forgetting the network but still cannot connect.
+Priority🟡 MEDIUM
+Email : rajesh.kumar@company.com
 Expected Result:
 
 ✅ GREEN BANNER → AUTO RESOLVED BY AI
@@ -21,7 +25,10 @@ Confidence → 85%+
 Solution  → Step by step fix shown
 
 👤 TICKET 2 — HUMAN CONFIRM Demo
-FieldValueTitleLaptop extremely slow and freezingDescriptionMy laptop takes 15 minutes to boot up every morning. Applications freeze randomly throughout the day. This issue started one week ago. I have tried restarting multiple times but the problem keeps coming back.Priority🟠 HIGHEmaildeepa.nair@company.com
+FieldValueTitle: Laptop extremely slow and freezing 
+Description: My laptop takes 15 minutes to boot up every morning. Applications freeze randomly throughout the day. This issue started one week ago. I have tried                                          restarting multiple times but the problem keeps coming back.
+Priority🟠 HIGH
+Email : deepa.nair@company.com
 Expected Result:
 🟡 AMBER BANNER → SENT FOR HUMAN REVIEW
 Category   → performance
@@ -29,7 +36,10 @@ Confidence → 60-84%
 Solution   → AI suggests but needs human
 
 🚨 TICKET 3 — ESCALATE Demo
-FieldValueTitleRansomware warning on my screenDescriptionMy computer is showing a ransom message saying all my files are encrypted and demanding Bitcoin payment within 24 hours. I have immediately disconnected my laptop from the network. Need urgent help right now.Priority🔴 CRITICALEmailaffected.user@company.com
+FieldValueTitle : Ransomware warning on my screen 
+Description : My computer is showing a ransom message saying all my files are encrypted and demanding Bitcoin payment within 24 hours. I have immediately                                disconnected my laptop from the network. Need urgent help right now.
+Priority🔴 CRITICAL
+Email: affected.user@company.com
 Expected Result:
 🔴 RED BANNER → ESCALATED TO HUMAN AGENT
 Category   → other/security
@@ -37,7 +47,10 @@ Confidence → below 60%
 Reason     → Critical security issue
 
 🌀 TICKET 4 — Fun Unusual Demo
-FieldValueTitleCoffee machine not workingDescriptionThe coffee machine near the IT department on 3rd floor stopped working since yesterday morning. The entire IT team runs on coffee. Team morale and productivity are severely impacted. Please fix immediately.Priority🟢 LOWEmailcaffeine.addict@company.com
+FieldValueTitle: Coffee machine not working
+Description: The coffee machine near the IT department on 3rd floor stopped working since yesterday morning. The entire IT team runs on coffee. Team morale and                            productivity are severely impacted. Please fix immediately.
+Priority🟢 LOW
+Email: caffeine.addict@company.com
 Expected Result:
 Shows AI still processes non-IT tickets!
 Category   → other
