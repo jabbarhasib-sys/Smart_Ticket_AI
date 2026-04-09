@@ -1,0 +1,184 @@
+{
+  "tickets": [
+
+    // ============================================
+    // ✅ HIGH CONFIDENCE — SHOULD AUTO RESOLVE
+    // ============================================
+
+    {
+      "ticket_no": 1,
+      
+      "title": "Cannot connect to office WiFi",
+      "description": "My laptop is not connecting to the office WiFi since morning. Other devices are working fine on the same network. I have tried forgetting the network and reconnecting but it still does not work.",
+      "priority": "medium",
+      "submitted_by": "rajesh.kumar@company.com"
+    },
+
+    {
+      "ticket_no": 2,
+      "title": "Outlook not opening",
+      "description": "Microsoft Outlook crashes immediately when I try to open it. Getting error code 0x80004005. I have tried restarting the laptop but the issue persists. Need my emails urgently.",
+      "priority": "medium",
+      "submitted_by": "priya.sharma@company.com"
+    },
+
+    {
+      "ticket_no": 3,
+      "title": "Need access to HR shared folder",
+      "description": "I recently joined the HR team but cannot access the HR shared drive. My manager has approved access. I need it to complete my onboarding tasks assigned for this week.",
+      "priority": "low",
+      "submitted_by": "ananya.iyer@company.com"
+    },
+
+    {
+      "ticket_no": 4,
+      "title": "Printer offline on 2nd floor",
+      "description": "The printer on 2nd floor shows offline. Multiple employees are unable to print documents. Print jobs are stuck in the queue. I have tried turning it off and on but still shows offline.",
+      "priority": "medium",
+      "submitted_by": "suresh.reddy@company.com"
+    },
+
+    {
+      "ticket_no": 5,
+      "title": "Forgot Windows login password",
+      "description": "I forgot my Windows password and cannot login to my computer. Need urgent reset as I have an important client meeting in 30 minutes and all my files are on this computer.",
+      "priority": "medium",
+      "submitted_by": "vikram.joshi@company.com"
+    },
+
+    // ============================================
+    // 👤 MEDIUM CONFIDENCE — HUMAN CONFIRMATION
+    // ============================================
+
+    {
+      "ticket_no": 6,
+      "title": "Laptop extremely slow",
+      "description": "My laptop takes 15 minutes to boot up. Applications freeze randomly throughout the day. This started 1 week ago. I have tried restarting multiple times but the problem continues affecting my work.",
+      "priority": "medium",
+      "submitted_by": "deepa.nair@company.com"
+    },
+
+    {
+      "ticket_no": 7,
+      "title": "VPN disconnects every 10 minutes",
+      "description": "Company VPN keeps disconnecting every 10 minutes while I am working from home. Reconnecting works temporarily but it disconnects again repeatedly. This is severely affecting my productivity.",
+      "priority": "high",
+      "submitted_by": "amit.verma@company.com"
+    },
+
+    {
+      "ticket_no": 8,
+      "title": "Excel file corrupted",
+      "description": "An important Excel report file got corrupted and I cannot open it. The file contains quarterly financial data needed for tomorrow's board meeting. I need this recovered urgently.",
+      "priority": "high",
+      "submitted_by": "neha.gupta@company.com"
+    },
+
+    {
+      "ticket_no": 9,
+      "title": "Email not syncing on iPhone",
+      "description": "Company emails stopped syncing on my iPhone 3 days ago. Was working fine before. I get an authentication error when trying to refresh. I have tried removing and re-adding the account.",
+      "priority": "low",
+      "submitted_by": "karthik.menon@company.com"
+    },
+
+    {
+      "ticket_no": 10,
+      "title": "Need Zoom Pro license",
+      "description": "I need a Zoom Pro license for conducting weekly client webinars. Currently on the free plan with a 40 minute limit which cuts off my client meetings. This is impacting client relationships.",
+      "priority": "low",
+      "submitted_by": "pooja.mishra@company.com"
+    },
+
+    // ============================================
+    // 🚨 LOW CONFIDENCE — ESCALATE TO HUMAN
+    // ============================================
+
+    {
+      "ticket_no": 11,
+      "title": "Server room temperature alarm triggered",
+      "description": "The server room temperature sensor is showing 45 degrees Celsius and the alarm has been triggered. The cooling system may have failed. All production servers are at risk of overheating immediately.",
+      "priority": "critical",
+      "submitted_by": "datacenter.ops@company.com"
+    },
+
+    {
+      "ticket_no": 12,
+      "title": "Suspected data breach on marketing system",
+      "description": "Noticed unusual login activity on our marketing portal from unknown IP addresses in another country at 3AM. Multiple failed attempts followed by a successful login. Customer data may be compromised.",
+      "priority": "critical",
+      "submitted_by": "security.team@company.com"
+    },
+
+    {
+      "ticket_no": 13,
+      "title": "Entire office network is down",
+      "description": "All employees on floor 3 have lost internet and internal network access since 9AM today. Over 50 people are affected. No one can access company systems, emails or internet. Operations are halted.",
+      "priority": "critical",
+      "submitted_by": "it.emergency@company.com"
+    },
+
+    {
+      "ticket_no": 14,
+      "title": "Ransomware warning on screen",
+      "description": "My computer is showing a ransom message saying all files are encrypted and demanding payment in Bitcoin within 24 hours. I have immediately disconnected from the network. Need urgent help.",
+      "priority": "critical",
+      "submitted_by": "affected.user@company.com"
+    },
+
+    {
+      "ticket_no": 15,
+      "title": "ERP system crashing for all users",
+      "description": "The company ERP system is crashing for all 200 users simultaneously since 10AM. All business operations including sales, inventory and finance are completely halted. Revenue loss is occurring every minute.",
+      "priority": "critical",
+      "submitted_by": "erp.admin@company.com"
+    },
+
+    // ============================================
+    // 🌀 NON-TECHNICAL / UNUSUAL — FUN EDGE CASES
+    // ============================================
+
+    {
+      "ticket_no": 16,
+      "title": "My office chair is broken",
+      "description": "My office chair wheel is broken and I keep rolling away from my desk every time I sit down. It is affecting my posture and productivity. Can IT or facilities help arrange a replacement chair?",
+      "priority": "low",
+      "submitted_by": "rolling.away@company.com"
+    },
+
+    {
+      "ticket_no": 17,
+      "title": "AC is too cold in my cabin",
+      "description": "The air conditioning in my cabin is set too cold and I cannot change the temperature. I have requested facilities multiple times but no response. It is affecting my ability to concentrate and work.",
+      "priority": "low",
+      "submitted_by": "freezing.employee@company.com"
+    },
+
+    {
+      "ticket_no": 18,
+      
+      "title": "Need a second monitor",
+      "description": "I need a second monitor to improve my productivity. I work on multiple applications simultaneously and constantly switching windows is slowing me down. Please arrange a second display for my workstation.",
+      "priority": "low",
+      "submitted_by": "productive.dev@company.com"
+    },
+
+    {
+      "ticket_no": 19,
+      
+      "title": "Coffee machine on 3rd floor not working",
+      "description": "The coffee machine near the IT department on 3rd floor stopped working since yesterday morning. The entire IT team runs on coffee. Team morale and productivity are severely impacted. Please fix ASAP.",
+      "priority": "low",
+      "submitted_by": "caffeine.addict@company.com"
+    },
+
+    {
+      "ticket_no": 20,
+      "title": "New joiner laptop setup required",
+      "description": "A new employee is joining tomorrow and needs complete laptop setup including Windows installation, company email configuration, VPN access, and all required software. Please arrange before 9AM tomorrow.",
+      "priority": "high",
+      "submitted_by": "hr.onboarding@company.com"
+    }
+
+  ]
+}
