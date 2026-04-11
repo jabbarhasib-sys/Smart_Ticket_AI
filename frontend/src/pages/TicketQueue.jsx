@@ -5,7 +5,7 @@ const API = 'http://127.0.0.1:8000';
 
 function ConfidenceBar({ score }) {
   const pct = Math.round((score || 0) * 100);
-  const color = pct >= 85 ? '#10b981' : pct >= 60 ? '#f59e0b' : '#ef4444';
+  const color = pct >= 75 ? '#10b981' : pct >= 50 ? '#f59e0b' : '#ef4444';
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
       <div className="conf-bar-bg">

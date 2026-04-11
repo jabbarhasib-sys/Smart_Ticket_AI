@@ -158,7 +158,7 @@ export default function SubmitTicket() {
               <div className="card" style={{ textAlign: 'center' }}>
                 <div className="stat-label">Confidence Score</div>
                 <div style={{ fontFamily: 'Orbitron', fontSize: '18px', marginTop: '8px', letterSpacing: '2px',
-                  color: ai.confidence_score >= 0.85 ? '#10b981' : ai.confidence_score >= 0.60 ? '#f59e0b' : '#ef4444' }}>
+                  color: ai.confidence_score >= 0.75 ? '#10b981' : ai.confidence_score >= 0.50 ? '#f59e0b' : '#ef4444' }}>
                   {Math.round((ai.confidence_score || 0) * 100)}%
                 </div>
               </div>
