@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API = 'http://54.80.7.105:8000';
+const API = 'http://127.0.0.1:8000';
 
 function ConfidenceBar({ score }) {
   const pct = Math.round((score || 0) * 100);

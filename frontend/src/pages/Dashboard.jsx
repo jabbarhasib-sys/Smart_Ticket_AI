@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
-const API = 'http://54.80.7.105:8000';
+const API = 'http://127.0.0.1:8000';
 const COLORS = ['#8b5cf6', '#06b6d4', '#ec4899', '#10b981', '#f97316', '#f59e0b'];
 
 // ── ANIMATED NUMBER COUNTER ──

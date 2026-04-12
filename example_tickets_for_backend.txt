@@ -1,7 +1,7 @@
 some tickets to run in the backend 
  steps to follow 
  Step 1 — Open This Link in Browser:
-                            http://54.80.7.105:8000/docs
+                            http://127.0.0.1:8000/docs
 
 Step 2 — Click on "Tickets" Section
 

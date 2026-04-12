@@ -47,8 +47,8 @@ async def startup_event():
     seed_database()
     print("✅ Sample data loaded!")
     print("="*50)
-    print("📡 Server running at: http://54.80.7.105:8000")
-    print("📚 API Docs at:       http://54.80.7.105:8000/docs")
+    print("📡 Server running at: http://127.0.0.1:8000")
+    print("📚 API Docs at:       http://127.0.0.1:8000/docs")
     print("="*50 + "\n")
 
 
