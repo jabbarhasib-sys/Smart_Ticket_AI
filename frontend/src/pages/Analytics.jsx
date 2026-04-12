@@ -5,7 +5,7 @@ import {
   PieChart, Pie, Cell, RadialBarChart, RadialBar, Legend
 } from 'recharts';
 
-const API = 'http://127.0.0.1:8000';
+const API = 'http://54.80.7.105:8000';
 const COLORS = ['#8b5cf6', '#06b6d4', '#ec4899', '#10b981', '#f97316', '#f59e0b'];
 
 const CustomTooltip = ({ active, payload, label }) => {

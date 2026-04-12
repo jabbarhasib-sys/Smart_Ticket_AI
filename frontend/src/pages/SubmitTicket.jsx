@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const API = 'http://127.0.0.1:8000';
+const API = 'http://54.80.7.105:8000';
 
 export default function SubmitTicket() {
   const [form, setForm] = useState({ title: '', description: '', priority: 'medium', submitted_by: '' });

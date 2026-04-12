@@ -6,7 +6,7 @@ import SubmitTicket from './pages/SubmitTicket';
 import Analytics from './pages/Analytics';
 import axios from 'axios';
 
-const API = 'http://127.0.0.1:8000';
+const API = 'http://54.80.7.105:8000';
 
 const NAV = [
   { id: 'dashboard', icon: '⬡', label: 'DASHBOARD' },
