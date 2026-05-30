@@ -107,6 +107,9 @@ This leads to:
 
 ```
 Smart_Ticket_AI/
+├── data/                          # Shared telemetry logs (root-level sibling)
+│   ├── admin_logins.json          # Real-time admin login history
+│   └── tickets_data.json          # Dynamic system tickets snapshot
 ├── backend/
 │   ├── main.py                    # FastAPI entry point
 │   ├── .env                       # Environment variables
@@ -116,7 +119,9 @@ Smart_Ticket_AI/
 │   │   ├── confidence.py          # Confidence scoring engine
 │   │   ├── rag_engine.py          # RAG pipeline (ChromaDB + LLM)
 │   │   ├── decision_engine.py     # HITL decision orchestrator
-│   │   └── explainer.py           # Explainable AI module
+│   │   ├── explainer.py           # Explainable AI module
+│   │   ├── json_logger.py         # Telemetry JSON logger
+│   │   └── security.py            # Secure password hashing (bcrypt)
 │   ├── routes/
 │   │   ├── tickets.py             # Ticket CRUD + AI trigger
 │   │   ├── agents.py              # Human agent APIs
@@ -125,12 +130,13 @@ Smart_Ticket_AI/
 │   │   └── schemas.py             # Pydantic data models
 │   └── database/
 │       ├── db.py                  # SQLAlchemy ORM models
-│       └── seed_data.py           # Sample data seeder
+│       └── seed_data.py           # Auto-seeder for support agents
 └── frontend/
     └── src/
         ├── App.js                 # Router + Sidebar
         ├── App.css                # Cyberpunk design system
         └── pages/
+            ├── AdminLogin.jsx     # Secure frontend login portal (Axios connected)
             ├── Dashboard.jsx      # Command center
             ├── TicketQueue.jsx    # HITL monitoring panel
             ├── SubmitTicket.jsx   # Ticket submission + AI result
@@ -197,7 +203,30 @@ npm start
 
 ---
 
+## 🧑‍💼 Support Team Access & Credentials
+
+The database comes pre-configured with secure developer and support agent logins hashed using raw `bcrypt` for safety. 
+
+*   **Shared Password for Support Team:** `SRH@2023`
+*   **Active Agent Accounts:**
+
+| Agent Name | Login Selection Value | Associated Support Email |
+|------------|-----------------------|--------------------------|
+| **Sangamesh Rajole** | `sangamesh-rajole` | `sangamesh-rajole@support.com` |
+| **Kashif Mehdi** | `kashif-mehdi` | `kashif-mehdi@support.com` |
+| **Jabbar Hasib** | `jabbar-hasib` | `jabbar-hasib@support.com` |
+
+To log in, simply navigate to the admin portal (`http://localhost:3000/admin/login`), select your name, and enter the shared password.
+
+---
+
 ## 🎯 Key Features
+
+### 🔐 Real-Time React + FastAPI Auth
+The frontend admin login page is connected securely to the backend agent login endpoint (`/agents/login`) using **Axios**. All authentications are checked on the server-side, preventing mocked sessions.
+
+### 📁 Shared Telemetry & JSON Logging
+Admin login details, timestamps, and ticket history snapshots are exported automatically in real-time to a **dedicated root-level sibling folder `data/`** (`admin_logins.json` and `tickets_data.json`), ensuring audit logs are cleanly separated from application code.
 
 ### 🤖 AI Pipeline (4-Step Processing)
 Every ticket submitted goes through an automated 4-step AI pipeline:
