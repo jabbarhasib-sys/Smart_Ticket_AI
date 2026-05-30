@@ -137,8 +137,8 @@ const injectStyles = () => {
   --amber: #f59e0b;
   --red: #f87171;
   
-  --font-heading: 'Syne', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-heading: 'Cormorant Garamond', serif;
+  --font-body: 'Nunito', sans-serif;
   
   --blob-1-bg: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%);
   --blob-2-bg: radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%);
@@ -307,14 +307,14 @@ const injectStyles = () => {
 .up-ring-2 { width: 210px; height: 210px; bottom: -35px; right: -35px; }
 .up-ring-3 { width: 520px; height: 520px; top: -130px; left: -220px; }
 .up-brand, .up-left-body, .up-stats { position: relative; z-index: 2; }
-.up-brand-mark { width: 46px; height: 46px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 13px; display: flex; align-items: center; justify-content: center; font-family: var(--font-heading), sans-serif; font-weight: 800; font-size: 20px; color: #fff; margin-bottom: 18px; }
-.up-brand-name { font-family: var(--font-heading), sans-serif; font-weight: 700; font-size: 21px; color: #fff; margin-bottom: 4px; }
+.up-brand-mark { width: 46px; height: 46px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 13px; display: flex; align-items: center; justify-content: center; font-family: var(--font-heading), sans-serif; font-weight: 700; font-size: 20px; color: #fff; margin-bottom: 18px; }
+.up-brand-name { font-family: var(--font-heading), sans-serif; font-weight: 600; font-size: 21px; color: #fff; margin-bottom: 4px; }
 .up-brand-tag { font-size: 12px; color: rgba(255,255,255,0.35); }
-.up-headline { font-family: var(--font-heading), sans-serif; font-weight: 800; font-size: 36px; color: #fff; line-height: 1.22; margin-bottom: 14px; letter-spacing: -.5px; }
+.up-headline { font-family: var(--font-heading), sans-serif; font-weight: 600; font-size: 36px; color: #fff; line-height: 1.22; margin-bottom: 14px; letter-spacing: -.3px; }
 .up-headline em { font-style: italic; color: var(--blush); }
 .up-desc { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.75; }
 .up-stats { display: flex; gap: 26px; }
-.up-stat-num { font-family: var(--font-heading), sans-serif; font-weight: 800; font-size: 25px; color: #fff; }
+.up-stat-num { font-family: var(--font-heading), sans-serif; font-weight: 700; font-size: 25px; color: #fff; }
 .up-stat-label { font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 2px; letter-spacing: .5px; text-transform: uppercase; }
 
 .up-right {
@@ -358,8 +358,8 @@ const injectStyles = () => {
 
 .up-mobile-brand { display: flex; align-items: center; gap: 9px; margin-bottom: 28px; }
 @media (min-width: 960px) { .up-mobile-brand { display: none; } }
-.up-mobile-mark { width: 34px; height: 34px; background: var(--rose); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: var(--font-heading), sans-serif; font-weight: 800; font-size: 17px; color: #fff; }
-.up-mobile-name { font-family: var(--font-heading), sans-serif; font-size: 18px; font-weight: 700; color: var(--text-dark); }
+.up-mobile-mark { width: 34px; height: 34px; background: var(--rose); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: var(--font-heading), sans-serif; font-weight: 700; font-size: 17px; color: #fff; }
+.up-mobile-name { font-family: var(--font-heading), sans-serif; font-size: 18px; font-weight: 600; color: var(--text-dark); }
 .up-mobile-name span { color: var(--rose); }
 
 .up-steps { display: flex; align-items: center; margin-bottom: 32px; }
@@ -375,7 +375,7 @@ const injectStyles = () => {
 .up-step-line { flex: 1; height: 1.5px; background: var(--mauve-light); margin: 0 7px; min-width: 18px; }
 .up-step-line.done { background: var(--step-line-done-bg); }
 
-.up-heading { font-family: var(--font-heading), sans-serif; font-weight: 800; font-size: 31px; color: var(--text-dark); line-height: 1.15; margin-bottom: 6px; letter-spacing: -.5px; }
+.up-heading { font-family: var(--font-heading), sans-serif; font-weight: 600; font-size: 31px; color: var(--text-dark); line-height: 1.15; margin-bottom: 6px; letter-spacing: -.3px; }
 .up-heading em { font-style: italic; color: var(--rose); }
 .up-subtext { font-size: 13.5px; color: var(--text-muted); margin-bottom: 28px; line-height: 1.6; }
 .up-subtext strong { color: var(--mauve); font-weight: 600; }
@@ -563,7 +563,7 @@ const injectStyles = () => {
 .up-summary-value {
   font-family: var(--font-heading), sans-serif;
   font-size: 28px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--text-dark);
 }
 
@@ -589,7 +589,7 @@ const injectStyles = () => {
 .up-panel-title {
   font-family: var(--font-heading), sans-serif;
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text-dark);
   margin-bottom: 6px;
 }
