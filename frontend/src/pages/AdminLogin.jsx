@@ -8,8 +8,6 @@ const ADMIN_OPTIONS = [
   { value: "jabbar-hasib", label: "Jabbar Hasib" },
 ];
 
-const SHARED_PASSWORD = "SRH@2023";
-
 const injectStyles = () => {
   if (document.getElementById("al-styles")) return;
   const el = document.createElement("style");
