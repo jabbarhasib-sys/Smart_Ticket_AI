@@ -68,6 +68,18 @@ class AgentResponse(BaseModel):
     class Config:
         from_attributes = True
 
+
+class UserOtpRequest(BaseModel):
+    email: Optional[str] = None
+    phone_number: Optional[str] = None
+    provider: str = "email"
+
+
+class UserOtpVerify(BaseModel):
+    email: Optional[str] = None
+    phone_number: Optional[str] = None
+    otp: str
+
 # --- Resolution Schemas ---
 class AIDecision(BaseModel):
     ticket_id: int

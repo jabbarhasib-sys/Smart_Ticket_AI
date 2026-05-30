@@ -1,164 +1,280 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import Dashboard from './pages/Dashboard';
-import TicketQueue from './pages/TicketQueue';
-import SubmitTicket from './pages/SubmitTicket';
-import Analytics from './pages/Analytics';
-import axios from 'axios';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+  Link,
+} from "react-router-dom";
 
-const API = 'http://127.0.0.1:8000';
+import Dashboard   from "./pages/Dashboard";
+import TicketQueue from "./pages/TicketQueue";
+import SubmitTicket from "./pages/SubmitTicket";
+import Analytics   from "./pages/Analytics";
+import UserPortal  from "./pages/UserPortal";
+import AdminLogin  from "./pages/AdminLogin";
+import KnowledgeBase from "./pages/KnowledgeBase";
 
-const NAV = [
-  { id: 'dashboard', icon: '⬡', label: 'DASHBOARD' },
-  { id: 'queue',     icon: '◈', label: 'TICKET QUEUE' },
-  { id: 'submit',    icon: '⊕', label: 'SUBMIT TICKET' },
-  { id: 'analytics', icon: '◎', label: 'ANALYTICS' },
-];
+import "./App.css";
 
-export default function App() {
-  const [page, setPage] = useState('dashboard');
-  const [pendingCount, setPendingCount] = useState(0);
+// ─────────────────────────────────────────────────────────────────────────────
+//  PrivateRoute  —  blocks access to admin routes without a token
+// ─────────────────────────────────────────────────────────────────────────────
+function PrivateRoute({ children }) {
+  const token = localStorage.getItem("agent_token");
+  return token ? children : <Navigate to="/admin/login" replace />;
+}
 
-  // ── THEME — remembers across refresh ──
-  const [darkMode, setDarkMode] = useState(() => {
-    const saved = localStorage.getItem('theme');
-    return saved ? saved === 'dark' : true;
-  });
+// ─────────────────────────────────────────────────────────────────────────────
+//  AdminSidebar  —  visible only on protected /dashboard/* routes
+// ─────────────────────────────────────────────────────────────────────────────
+function AdminSidebar() {
+  const location = useLocation();
+  const adminName = localStorage.getItem("agent_name") || "Admin";
 
-  // ── Apply theme to body ──
-  useEffect(() => {
-    document.body.setAttribute('data-theme', darkMode ? 'dark' : 'light');
-    localStorage.setItem('theme', darkMode ? 'dark' : 'light');
-  }, [darkMode]);
+  const navItems = [
+    { path: "/dashboard",  label: "Dashboard",    icon: "⬡" },
+    { path: "/queue",      label: "Ticket Queue", icon: "◈" },
+    { path: "/kb",         label: "Knowledge Base", icon: "📖" },
+    { path: "/analytics",  label: "Analytics",    icon: "◉" },
+    { path: "/submit",     label: "Submit Ticket",icon: "+"  },
+  ];
 
-  // ── Fetch pending count every 10 seconds ──
-  useEffect(() => {
-    const fetchPending = async () => {
-      try {
-        const res = await axios.get(`${API}/analytics/summary`);
-        setPendingCount(res.data.pending_human || 0);
-      } catch (e) {}
-    };
-    fetchPending();
-    const interval = setInterval(fetchPending, 10000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const renderPage = () => {
-    if (page === 'dashboard') return <Dashboard />;
-    if (page === 'queue') return <TicketQueue />;
-    if (page === 'submit') return <SubmitTicket />;
-    if (page === 'analytics') return <Analytics />;
+  const logout = () => {
+    localStorage.removeItem("agent_token");
+    localStorage.removeItem("agent_name");
+    window.location.href = "/admin/login";
   };
 
   return (
-    <div className="app">
-      <div className="sidebar">
-
-        {/* LOGO */}
-        <div className="sidebar-logo">
-          ⬡ SMART TICKET
-          <span className="sub">AI · HITL · ENTERPRISE</span>
-        </div>
-
-        {/* NAV ITEMS */}
-        {NAV.map(n => (
-          <button
-            key={n.id}
-            className={`nav-item ${page === n.id ? 'active' : ''}`}
-            onClick={() => setPage(n.id)}
-          >
-            <span style={{ fontSize: '18px' }}>{n.icon}</span>
-            {n.label}
-            {n.id === 'queue' && pendingCount > 0 && (
-              <span className="nav-badge">{pendingCount}</span>
-            )}
-          </button>
-        ))}
-
-        {/* DARK / LIGHT TOGGLE */}
-        <div style={{
-          margin: '16px 0',
-          padding: '12px 8px',
-          borderTop: '1px solid rgba(139,92,246,0.15)',
-          borderBottom: '1px solid rgba(139,92,246,0.15)',
-        }}>
-          <div style={{
-            fontSize: '10px',
-            color: 'var(--text-secondary)',
-            letterSpacing: '2px',
-            fontFamily: 'JetBrains Mono',
-            marginBottom: '10px'
-          }}>
-            DISPLAY MODE
-          </div>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            background: 'rgba(255,255,255,0.05)',
-            borderRadius: '10px',
-            padding: '4px',
-            border: '1px solid rgba(139,92,246,0.2)'
-          }}>
-            {/* DARK BUTTON */}
-            <button
-              onClick={() => setDarkMode(true)}
-              style={{
-                flex: 1, padding: '8px',
-                borderRadius: '8px', border: 'none',
-                cursor: 'pointer', fontSize: '12px',
-                fontWeight: 700, fontFamily: 'JetBrains Mono',
-                letterSpacing: '1px', transition: 'all 0.3s',
-                background: darkMode
-                  ? 'linear-gradient(135deg, #8b5cf6, #6366f1)'
-                  : 'transparent',
-                color: darkMode ? 'white' : 'var(--text-secondary)',
-                boxShadow: darkMode
-                  ? '0 0 15px rgba(139,92,246,0.4)'
-                  : 'none',
-              }}>
-              🌙 DARK
-            </button>
-
-            {/* LIGHT BUTTON */}
-            <button
-              onClick={() => setDarkMode(false)}
-              style={{
-                flex: 1, padding: '8px',
-                borderRadius: '8px', border: 'none',
-                cursor: 'pointer', fontSize: '12px',
-                fontWeight: 700, fontFamily: 'JetBrains Mono',
-                letterSpacing: '1px', transition: 'all 0.3s',
-                background: !darkMode
-                  ? 'linear-gradient(135deg, #f59e0b, #f97316)'
-                  : 'transparent',
-                color: !darkMode ? 'white' : 'var(--text-secondary)',
-                boxShadow: !darkMode
-                  ? '0 0 15px rgba(245,158,11,0.4)'
-                  : 'none',
-              }}>
-              ☀️ LIGHT
-            </button>
-          </div>
-        </div>
-
-        {/* FOOTER */}
-        <div className="sidebar-footer">
-          <div className="system-status">
-            <div className="status-dot" />
-            SYSTEM ONLINE
-          </div>
-          🏆 ATOS SRIJAN 2026
-        </div>
-
+    <aside style={S.sidebar}>
+      {/* Logo */}
+      <div style={S.sidebarLogo}>
+        <div style={S.sidebarMark}>AI</div>
+        <span style={S.sidebarName}>
+          Smart<span style={{ color: "#818cf8" }}>Ticket</span>
+        </span>
+        <span style={S.sidebarBadge}>Admin</span>
       </div>
 
-      {/* MAIN CONTENT */}
-      <div className="main">
-        {renderPage()}
+      {/* Nav */}
+      <nav style={S.nav}>
+        {navItems.map(item => {
+          const active = location.pathname === item.path;
+          return (
+            <Link key={item.path} to={item.path}
+              style={{ ...S.navItem, ...(active ? S.navItemActive : {}) }}>
+              <span style={S.navIcon}>{item.icon}</span>
+              {item.label}
+            </Link>
+          );
+        })}
+      </nav>
+
+      {/* User portal link */}
+      <div style={S.sidebarDivider} />
+      <Link to="/" style={S.portalLink}>
+        <span style={{ fontSize: "13px" }}>↗</span> User Portal
+      </Link>
+
+      <div style={S.agentCard}>
+        <div style={S.agentCardLabel}>Logged in as</div>
+        <div style={S.agentCardName}>{adminName}</div>
       </div>
 
+      {/* Logout */}
+      <button style={S.logoutBtn} onClick={logout}>⎋ Logout</button>
+    </aside>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  AdminLayout  —  sidebar + content wrapper
+// ─────────────────────────────────────────────────────────────────────────────
+function AdminLayout({ children }) {
+  return (
+    <div style={S.adminRoot}>
+      <AdminSidebar />
+      <main style={S.adminMain}>{children}</main>
     </div>
   );
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  App  —  router entry point
+//
+//  URL structure:
+//    /                → UserPortal  (public — for end users)
+//    /admin/login     → AdminLogin  (public — for handling team)
+//    /dashboard       → Dashboard   (protected)
+//    /queue           → TicketQueue (protected)
+//    /kb              → KnowledgeBase (protected)
+//    /analytics       → Analytics   (protected)
+//    /submit          → SubmitTicket(protected — internal use)
+//    *                → redirect to /
+// ─────────────────────────────────────────────────────────────────────────────
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+
+        {/* ════ PUBLIC: User-facing portal ════ */}
+        <Route path="/" element={<UserPortal />} />
+
+        {/* ════ PUBLIC: Admin login ════ */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+
+        {/* ════ PROTECTED: Admin dashboard ════ */}
+        <Route path="/dashboard" element={
+          <PrivateRoute>
+            <AdminLayout><Dashboard /></AdminLayout>
+          </PrivateRoute>
+        } />
+        <Route path="/queue" element={
+          <PrivateRoute>
+            <AdminLayout><TicketQueue /></AdminLayout>
+          </PrivateRoute>
+        } />
+        <Route path="/kb" element={
+          <PrivateRoute>
+            <AdminLayout><KnowledgeBase /></AdminLayout>
+          </PrivateRoute>
+        } />
+        <Route path="/analytics" element={
+          <PrivateRoute>
+            <AdminLayout><Analytics /></AdminLayout>
+          </PrivateRoute>
+        } />
+        <Route path="/submit" element={
+          <PrivateRoute>
+            <AdminLayout><SubmitTicket /></AdminLayout>
+          </PrivateRoute>
+        } />
+
+        {/* ════ Fallback ════ */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+
+      </Routes>
+    </Router>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  Styles  —  inline so we don't touch existing App.css
+// ─────────────────────────────────────────────────────────────────────────────
+const S = {
+  adminRoot: {
+    display: "flex",
+    minHeight: "100vh",
+    background: "#0B0F1A",
+    fontFamily: "'DM Sans', 'Segoe UI', sans-serif",
+  },
+  sidebar: {
+    width: "220px",
+    minHeight: "100vh",
+    background: "rgba(255,255,255,0.025)",
+    borderRight: "1px solid rgba(255,255,255,0.06)",
+    display: "flex",
+    flexDirection: "column",
+    padding: "20px 0",
+    flexShrink: 0,
+  },
+  sidebarLogo: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    padding: "0 18px 22px",
+    borderBottom: "1px solid rgba(255,255,255,0.06)",
+    marginBottom: "14px",
+  },
+  sidebarMark: {
+    width: "32px", height: "32px",
+    background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+    borderRadius: "9px",
+    display: "flex", alignItems: "center", justifyContent: "center",
+    fontWeight: "800", fontSize: "12px", color: "#fff",
+    fontFamily: "'Syne', sans-serif",
+  },
+  sidebarName: {
+    fontWeight: "700", fontSize: "15px", color: "#e2e8f0",
+    fontFamily: "'Syne', sans-serif",
+  },
+  sidebarBadge: {
+    marginLeft: "auto",
+    padding: "2px 8px",
+    background: "rgba(99,102,241,0.12)",
+    border: "1px solid rgba(99,102,241,0.22)",
+    borderRadius: "20px",
+    fontSize: "9px", fontWeight: "600", color: "#818cf8",
+    textTransform: "uppercase", letterSpacing: "0.6px",
+  },
+  nav: {
+    flex: 1,
+    display: "flex", flexDirection: "column", gap: "2px",
+    padding: "0 8px",
+  },
+  navItem: {
+    display: "flex", alignItems: "center", gap: "9px",
+    padding: "9px 12px", borderRadius: "9px",
+    textDecoration: "none", color: "#64748b",
+    fontSize: "13px", fontWeight: "500",
+    transition: "all 0.2s",
+  },
+  navItemActive: {
+    background: "rgba(99,102,241,0.1)",
+    color: "#818cf8",
+    border: "1px solid rgba(99,102,241,0.18)",
+  },
+  navIcon: {
+    fontSize: "13px", width: "16px", textAlign: "center",
+  },
+  sidebarDivider: {
+    height: "1px",
+    background: "rgba(255,255,255,0.05)",
+    margin: "12px 18px",
+  },
+  portalLink: {
+    display: "flex", alignItems: "center", gap: "6px",
+    padding: "8px 20px",
+    textDecoration: "none", color: "#475569",
+    fontSize: "12px", fontWeight: "500",
+    transition: "color 0.2s",
+  },
+  agentCard: {
+    margin: "10px 14px 0",
+    padding: "12px 14px",
+    borderRadius: "12px",
+    background: "rgba(99,102,241,0.08)",
+    border: "1px solid rgba(99,102,241,0.16)",
+  },
+  agentCardLabel: {
+    fontSize: "10px",
+    fontWeight: "700",
+    letterSpacing: "0.8px",
+    textTransform: "uppercase",
+    color: "#64748b",
+    marginBottom: "5px",
+  },
+  agentCardName: {
+    fontSize: "13px",
+    fontWeight: "700",
+    color: "#e2e8f0",
+  },
+  logoutBtn: {
+    margin: "8px 8px 0",
+    padding: "9px 12px",
+    background: "none",
+    border: "1px solid rgba(255,255,255,0.07)",
+    borderRadius: "9px",
+    color: "#475569", fontSize: "12px", fontWeight: "500",
+    cursor: "pointer",
+    textAlign: "left",
+    fontFamily: "inherit",
+    transition: "all 0.2s",
+  },
+  adminMain: {
+    flex: 1,
+    overflow: "auto",
+  },
+};

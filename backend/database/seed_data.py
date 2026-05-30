@@ -1,8 +1,7 @@
 from database.db import SessionLocal, TicketDB, AgentDB, AuditLogDB, create_tables
-from passlib.context import CryptContext
 from datetime import datetime
-
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+from core.json_logger import sync_tickets_to_json
+from core.security import hash_password
 
 sample_tickets = [
     {
@@ -93,6 +92,21 @@ sample_agents = [
         "email": "agent2@support.com",
         "password": "agent123"
     },
+    {
+        "name": "Sangamesh Rajole",
+        "email": "sangamesh-rajole@support.com",
+        "password": "SRH@2023"
+    },
+    {
+        "name": "Kashif Mehdi",
+        "email": "kashif-mehdi@support.com",
+        "password": "SRH@2023"
+    },
+    {
+        "name": "Jabbar Hasib",
+        "email": "jabbar-hasib@support.com",
+        "password": "SRH@2023"
+    },
 ]
 
 def seed_database():
@@ -100,18 +114,18 @@ def seed_database():
     db = SessionLocal()
 
     try:
-        # Seed agents
-        existing_agents = db.query(AgentDB).count()
-        if existing_agents == 0:
-            for agent_data in sample_agents:
+        # Seed agents dynamically
+        for agent_data in sample_agents:
+            existing = db.query(AgentDB).filter(AgentDB.email == agent_data["email"]).first()
+            if not existing:
                 agent = AgentDB(
                     name=agent_data["name"],
                     email=agent_data["email"],
-                    hashed_password=pwd_context.hash(agent_data["password"]),
+                    hashed_password=hash_password(agent_data["password"]),
                     is_active=True
                 )
                 db.add(agent)
-            print("✅ Agents seeded successfully!")
+        print("✅ Agents synchronized successfully!")
 
         # Seed tickets
         existing_tickets = db.query(TicketDB).count()
@@ -122,6 +136,7 @@ def seed_database():
             print("✅ Tickets seeded successfully!")
 
         db.commit()
+        sync_tickets_to_json(db)
         print("✅ Database seeding complete!")
 
     except Exception as e:

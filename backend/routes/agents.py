@@ -2,12 +2,12 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database.db import get_db, AgentDB, TicketDB, AuditLogDB
 from models.schemas import AgentCreate, AgentLogin, AgentResponse
-from passlib.context import CryptContext
 from datetime import datetime
 from typing import List
+from core.json_logger import log_admin_login, sync_tickets_to_json
+from core.security import hash_password, verify_password
 
 router = APIRouter(prefix="/agents", tags=["Agents"])
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 # ── REGISTER AGENT ────────────────────────────────────────
@@ -23,7 +23,7 @@ async def register_agent(agent: AgentCreate, db: Session = Depends(get_db)):
         new_agent = AgentDB(
             name=agent.name,
             email=agent.email,
-            hashed_password=pwd_context.hash(agent.password),
+            hashed_password=hash_password(agent.password),
             is_active=True,
             created_at=datetime.utcnow()
         )
@@ -53,11 +53,13 @@ async def login_agent(credentials: AgentLogin, db: Session = Depends(get_db)):
     if not agent:
         raise HTTPException(status_code=401, detail="Invalid email or password")
 
-    if not pwd_context.verify(credentials.password, agent.hashed_password):
+    if not verify_password(credentials.password, agent.hashed_password):
         raise HTTPException(status_code=401, detail="Invalid email or password")
 
     if not agent.is_active:
         raise HTTPException(status_code=403, detail="Agent account is deactivated")
+
+    log_admin_login(agent_id=agent.id, name=agent.name, email=agent.email)
 
     return {
         "success": True,
@@ -150,6 +152,8 @@ async def assign_ticket(
     )
     db.add(audit)
     db.commit()
+
+    sync_tickets_to_json(db)
 
     return {
         "success": True,

@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 load_dotenv()  # ← Load env vars FIRST before anything else
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import tickets, agents, analytics
+from routes import tickets, agents, analytics, users, kb
 from database.db import create_tables
 from database.seed_data import seed_database
 import uvicorn
@@ -34,6 +34,8 @@ app.add_middleware(
 app.include_router(tickets.router)
 app.include_router(agents.router)
 app.include_router(analytics.router)
+app.include_router(users.router)
+app.include_router(kb.router)
 
 
 # ── STARTUP ───────────────────────────────────────────────

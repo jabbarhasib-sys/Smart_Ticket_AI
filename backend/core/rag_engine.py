@@ -6,6 +6,7 @@ from sentence_transformers import SentenceTransformer
 import os
 import json
 from dotenv import load_dotenv
+from datetime import datetime
 
 load_dotenv()
 
@@ -219,3 +220,36 @@ def run_rag_pipeline(
         "similar_solutions_found": len(similar),
         "rag_success": result["success"]
     }
+
+
+def add_solution_to_knowledge_base(issue: str, solution: str, category: str, ticket_id: int) -> bool:
+    """
+    Adds a new resolved solution to the ChromaDB knowledge base.
+    This creates an auto-learning pipeline where subsequent tickets will benefit from this solution.
+    """
+    try:
+        collection = _get_or_create_collection()
+        doc = f"{issue} {solution}"
+        embedding = embedding_model.encode([doc]).tolist()
+        
+        # Unique ID for the newly learned knowledge base entry
+        id_str = f"ticket_{ticket_id}_{int(datetime.utcnow().timestamp())}"
+        
+        metadata = {
+            "category": category or "other",
+            "issue": issue,
+            "ticket_id": ticket_id,
+            "source": "human_feedback"
+        }
+        
+        collection.add(
+            documents=[doc],
+            embeddings=embedding,
+            ids=[id_str],
+            metadatas=[metadata]
+        )
+        print(f"✅ Successfully added ticket #{ticket_id} solution to ChromaDB knowledge base!")
+        return True
+    except Exception as e:
+        print(f"❌ Error adding solution to ChromaDB: {e}")
+        return False
