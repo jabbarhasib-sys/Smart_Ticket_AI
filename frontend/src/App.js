@@ -29,7 +29,7 @@ function PrivateRoute({ children }) {
 // ─────────────────────────────────────────────────────────────────────────────
 //  AdminSidebar  —  visible only on protected /dashboard/* routes
 // ─────────────────────────────────────────────────────────────────────────────
-function AdminSidebar() {
+function AdminSidebar({ theme, toggleTheme }) {
   const location = useLocation();
   const adminName = localStorage.getItem("agent_name") || "Admin";
 
@@ -53,7 +53,7 @@ function AdminSidebar() {
       <div style={S.sidebarLogo}>
         <div style={S.sidebarMark}>AI</div>
         <span style={S.sidebarName}>
-          Smart<span style={{ color: "#818cf8" }}>Ticket</span>
+          Smart<span style={{ color: "var(--neon-purple)" }}>Ticket</span>
         </span>
         <span style={S.sidebarBadge}>Admin</span>
       </div>
@@ -83,6 +83,11 @@ function AdminSidebar() {
         <div style={S.agentCardName}>{adminName}</div>
       </div>
 
+      {/* Theme Switcher */}
+      <button style={S.themeBtn} onClick={toggleTheme}>
+        {theme === "dark" ? "☀️ Light Mode" : "🌙 Dark Mode"}
+      </button>
+
       {/* Logout */}
       <button style={S.logoutBtn} onClick={logout}>⎋ Logout</button>
     </aside>
@@ -92,10 +97,10 @@ function AdminSidebar() {
 // ─────────────────────────────────────────────────────────────────────────────
 //  AdminLayout  —  sidebar + content wrapper
 // ─────────────────────────────────────────────────────────────────────────────
-function AdminLayout({ children }) {
+function AdminLayout({ children, theme, toggleTheme }) {
   return (
     <div style={S.adminRoot}>
-      <AdminSidebar />
+      <AdminSidebar theme={theme} toggleTheme={toggleTheme} />
       <main style={S.adminMain}>{children}</main>
     </div>
   );
@@ -115,6 +120,15 @@ function AdminLayout({ children }) {
 //    *                → redirect to /
 // ─────────────────────────────────────────────────────────────────────────────
 export default function App() {
+  const [theme, setTheme] = React.useState(localStorage.getItem("admin_theme") || "dark");
+
+  React.useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("admin_theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(p => (p === "dark" ? "light" : "dark"));
+
   return (
     <Router>
       <Routes>
@@ -128,27 +142,27 @@ export default function App() {
         {/* ════ PROTECTED: Admin dashboard ════ */}
         <Route path="/dashboard" element={
           <PrivateRoute>
-            <AdminLayout><Dashboard /></AdminLayout>
+            <AdminLayout theme={theme} toggleTheme={toggleTheme}><Dashboard /></AdminLayout>
           </PrivateRoute>
         } />
         <Route path="/queue" element={
           <PrivateRoute>
-            <AdminLayout><TicketQueue /></AdminLayout>
+            <AdminLayout theme={theme} toggleTheme={toggleTheme}><TicketQueue /></AdminLayout>
           </PrivateRoute>
         } />
         <Route path="/kb" element={
           <PrivateRoute>
-            <AdminLayout><KnowledgeBase /></AdminLayout>
+            <AdminLayout theme={theme} toggleTheme={toggleTheme}><KnowledgeBase /></AdminLayout>
           </PrivateRoute>
         } />
         <Route path="/analytics" element={
           <PrivateRoute>
-            <AdminLayout><Analytics /></AdminLayout>
+            <AdminLayout theme={theme} toggleTheme={toggleTheme}><Analytics /></AdminLayout>
           </PrivateRoute>
         } />
         <Route path="/submit" element={
           <PrivateRoute>
-            <AdminLayout><SubmitTicket /></AdminLayout>
+            <AdminLayout theme={theme} toggleTheme={toggleTheme}><SubmitTicket /></AdminLayout>
           </PrivateRoute>
         } />
 
@@ -167,14 +181,14 @@ const S = {
   adminRoot: {
     display: "flex",
     minHeight: "100vh",
-    background: "#0B0F1A",
+    background: "var(--bg-primary)",
     fontFamily: "'DM Sans', 'Segoe UI', sans-serif",
   },
   sidebar: {
     width: "220px",
     minHeight: "100vh",
-    background: "rgba(255,255,255,0.025)",
-    borderRight: "1px solid rgba(255,255,255,0.06)",
+    background: "var(--bg-card)",
+    borderRight: "1px solid var(--border)",
     display: "flex",
     flexDirection: "column",
     padding: "20px 0",
@@ -185,28 +199,28 @@ const S = {
     alignItems: "center",
     gap: "8px",
     padding: "0 18px 22px",
-    borderBottom: "1px solid rgba(255,255,255,0.06)",
+    borderBottom: "1px solid var(--border)",
     marginBottom: "14px",
   },
   sidebarMark: {
     width: "32px", height: "32px",
-    background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+    background: "linear-gradient(135deg, var(--neon-purple), var(--neon-cyan))",
     borderRadius: "9px",
     display: "flex", alignItems: "center", justifyContent: "center",
     fontWeight: "800", fontSize: "12px", color: "#fff",
     fontFamily: "'Syne', sans-serif",
   },
   sidebarName: {
-    fontWeight: "700", fontSize: "15px", color: "#e2e8f0",
+    fontWeight: "700", fontSize: "15px", color: "var(--text-primary)",
     fontFamily: "'Syne', sans-serif",
   },
   sidebarBadge: {
     marginLeft: "auto",
     padding: "2px 8px",
-    background: "rgba(99,102,241,0.12)",
-    border: "1px solid rgba(99,102,241,0.22)",
+    background: "rgba(139, 92, 246, 0.12)",
+    border: "1px solid rgba(139, 92, 246, 0.22)",
     borderRadius: "20px",
-    fontSize: "9px", fontWeight: "600", color: "#818cf8",
+    fontSize: "9px", fontWeight: "600", color: "var(--neon-purple)",
     textTransform: "uppercase", letterSpacing: "0.6px",
   },
   nav: {
@@ -217,27 +231,30 @@ const S = {
   navItem: {
     display: "flex", alignItems: "center", gap: "9px",
     padding: "9px 12px", borderRadius: "9px",
-    textDecoration: "none", color: "#64748b",
+    textDecoration: "none", color: "var(--text-secondary)",
     fontSize: "13px", fontWeight: "500",
     transition: "all 0.2s",
   },
   navItemActive: {
-    background: "rgba(99,102,241,0.1)",
-    color: "#818cf8",
-    border: "1px solid rgba(99,102,241,0.18)",
+    background: "linear-gradient(135deg, rgba(236, 72, 153, 0.12), rgba(139, 92, 246, 0.07))",
+    color: "var(--neon-pink)",
+    borderTop: "1px solid rgba(236, 72, 153, 0.25)",
+    borderRight: "1px solid rgba(236, 72, 153, 0.25)",
+    borderBottom: "1px solid rgba(236, 72, 153, 0.25)",
+    borderLeft: "3px solid var(--neon-pink)",
   },
   navIcon: {
     fontSize: "13px", width: "16px", textAlign: "center",
   },
   sidebarDivider: {
     height: "1px",
-    background: "rgba(255,255,255,0.05)",
+    background: "var(--border)",
     margin: "12px 18px",
   },
   portalLink: {
     display: "flex", alignItems: "center", gap: "6px",
     padding: "8px 20px",
-    textDecoration: "none", color: "#475569",
+    textDecoration: "none", color: "var(--text-secondary)",
     fontSize: "12px", fontWeight: "500",
     transition: "color 0.2s",
   },
@@ -245,29 +262,41 @@ const S = {
     margin: "10px 14px 0",
     padding: "12px 14px",
     borderRadius: "12px",
-    background: "rgba(99,102,241,0.08)",
-    border: "1px solid rgba(99,102,241,0.16)",
+    background: "rgba(139, 92, 246, 0.05)",
+    border: "1px solid var(--border)",
   },
   agentCardLabel: {
     fontSize: "10px",
     fontWeight: "700",
     letterSpacing: "0.8px",
     textTransform: "uppercase",
-    color: "#64748b",
+    color: "var(--text-secondary)",
     marginBottom: "5px",
   },
   agentCardName: {
     fontSize: "13px",
     fontWeight: "700",
-    color: "#e2e8f0",
+    color: "var(--text-primary)",
+  },
+  themeBtn: {
+    margin: "8px 8px 0",
+    padding: "9px 12px",
+    background: "none",
+    border: "1px solid var(--border)",
+    borderRadius: "9px",
+    color: "var(--text-secondary)", fontSize: "12px", fontWeight: "600",
+    cursor: "pointer",
+    textAlign: "left",
+    fontFamily: "inherit",
+    transition: "all 0.2s",
   },
   logoutBtn: {
     margin: "8px 8px 0",
     padding: "9px 12px",
     background: "none",
-    border: "1px solid rgba(255,255,255,0.07)",
+    border: "1px solid var(--border)",
     borderRadius: "9px",
-    color: "#475569", fontSize: "12px", fontWeight: "500",
+    color: "var(--text-secondary)", fontSize: "12px", fontWeight: "500",
     cursor: "pointer",
     textAlign: "left",
     fontFamily: "inherit",

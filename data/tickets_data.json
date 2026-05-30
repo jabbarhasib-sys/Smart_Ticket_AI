@@ -124,15 +124,15 @@
         "title": "Cannot connect to VPN",
         "description": "I am unable to connect to the company VPN from home. It keeps timing out after entering my credentials. Was working fine yesterday. I have tried restarting my laptop but the issue persists.",
         "priority": "low",
-        "status": "pending_human",
+        "status": "human_resolved",
         "category": "network",
         "confidence_score": 0.8,
-        "ai_solution": "**Ticket Solution: Cannot Connect to VPN**\n\n**Immediate Action:**\n\n1. **Restart VPN client**: Close the VPN client and reopen it. This may resolve the issue.\n2. **Check internet connection**: Ensure your home internet connection is stable. Try accessing a website or checking your email to confirm.\n3. **Clear VPN cache**: Go to the VPN client settings, find the \"Clear Cache\" or \"Clear Data\" option, and select it. This will remove any cached data that may be causing the issue.\n4. **Try alternate VPN server**: If the above steps don't work, try connecting to a different VPN server. This can help identify if the issue is specific to a particular server.\n\n**Next Steps:**\n\nIf the issue persists, please escalate to the IT team for further assistance. We will investigate further and provide a more detailed solution.",
+        "ai_solution": "done",
         "explanation": "🤖 AI Analysis Summary\n\n📂 Category Detected: NETWORK\n🔍 Pattern Recognized: User experiencing intermittent VPN connectivity issues after recent change or update\n\n📊 Confidence Score: 0.8 (High)\n💡 Reasoning: Common VPN connection issue with known troubleshooting steps, clear description, and no security or compliance implications.\n\n⚠️ Risk Factors:\n  • business_impact\n\n🔁 This is a known repetitive issue with established solutions.\n\n👤 Decision: HUMAN CONFIRMATION — AI suggests solution but human should verify.",
         "submitted_by": "jabbar@company.com",
-        "assigned_to": null,
+        "assigned_to": "human_agent",
         "created_at": "2026-03-14T11:29:42.501119",
-        "updated_at": "2026-03-14T11:29:43.406665"
+        "updated_at": "2026-05-30T05:46:21.500616"
     },
     {
         "id": 10,
@@ -493,5 +493,50 @@
         "assigned_to": null,
         "created_at": "2026-05-30T04:35:00.718876",
         "updated_at": "2026-05-30T04:35:02.584572"
+    },
+    {
+        "id": 34,
+        "title": "unable to connect it to vpn",
+        "description": "since morning unable to vpn since morning just solve this issue",
+        "priority": "critical",
+        "status": "human_resolved",
+        "category": "network",
+        "confidence_score": 0.7,
+        "ai_solution": "just check your connection and try again ",
+        "explanation": "🤖 AI Analysis Summary\n\n📂 Category Detected: NETWORK\n🔍 Pattern Recognized: User reports sudden inability to connect to VPN service\n\n📊 Confidence Score: 0.7 (High)\n💡 Reasoning: Ticket is categorized under network and has a critical priority, indicating a high likelihood of a VPN issue.\n\n⚠️ Risk Factors:\n  • critical priority\n  • network category\n\n👤 Decision: HUMAN CONFIRMATION — AI suggests solution but human should verify.",
+        "submitted_by": "jabbar.hasib@gmail.com",
+        "assigned_to": "human_agent",
+        "created_at": "2026-05-30T16:46:02.580720",
+        "updated_at": "2026-05-30T16:47:44.683995"
+    },
+    {
+        "id": 35,
+        "title": "unable to connect to the vpn",
+        "description": "since i came to my pc i am unable to join in to server and connect to the vpn just solve my isseue asap",
+        "priority": "high",
+        "status": "auto_resolved",
+        "category": "network",
+        "confidence_score": 0.88,
+        "ai_solution": "**Ticket Resolution: Unable to Connect to VPN**\n\nTo resolve the issue, please follow these steps:\n\n1. **Check your internet connection**: Ensure your internet connection is stable and working properly. Try opening a web browser to verify this.\n2. **Restart VPN client**: Close the VPN client and restart it. This will refresh the connection and may resolve the issue.\n3. **Clear VPN cache and reconnect**: Go to the VPN client settings and clear the cache. Then, reconnect to the VPN server.\n4. **Try alternate VPN server**: If the above steps don't work, try connecting to a different VPN server to rule out any server-side issues.\n\n**Immediate Action Required**:\n\n- Please confirm if your internet connection is stable.\n- Restart the VPN client and try reconnecting.\n- If the issue persists, proceed with clearing the VPN cache and trying an alternate VPN server.\n\nIf the issue is still not resolved, please escalate the ticket for further assistance.",
+        "explanation": "🤖 AI Analysis Summary\n\n📂 Category Detected: NETWORK\n🔍 Pattern Recognized: user unable to access network resources after reboot or login\n\n📊 Confidence Score: 0.88 (Very High)\n💡 Reasoning: The ticket is categorized under network and the title explicitly mentions VPN issues, which aligns with the scoring guide.\n\n⚠️ Risk Factors:\n  • high priority\n  • network category\n\n✅ Decision: AUTO-RESOLVED — High confidence in solution accuracy.",
+        "submitted_by": "jabbar.hasib@gmail.com",
+        "assigned_to": null,
+        "created_at": "2026-05-30T17:00:44.640414",
+        "updated_at": "2026-05-30T17:00:50.381985"
+    },
+    {
+        "id": 36,
+        "title": "unable to connect it to the vpn",
+        "description": "since morning   am unable to connect it to the server and the vpn just  look at it and solve asap",
+        "priority": "medium",
+        "status": "open",
+        "category": null,
+        "confidence_score": null,
+        "ai_solution": null,
+        "explanation": null,
+        "submitted_by": "jabbar.hasib@gmail.com",
+        "assigned_to": null,
+        "created_at": "2026-05-30T17:16:46.154269",
+        "updated_at": "2026-05-30T17:16:46.154269"
     }
 ]

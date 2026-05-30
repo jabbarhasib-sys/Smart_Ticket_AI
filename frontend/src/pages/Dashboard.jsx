@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
@@ -28,14 +28,14 @@ function AnimatedNumber({ value, suffix = '' }) {
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload?.length) return (
     <div style={{
-      background: 'rgba(13,17,23,0.97)',
+      background: 'var(--bg-card)',
       border: '1px solid rgba(139,92,246,0.4)',
       borderRadius: '10px', padding: '10px 14px',
       fontFamily: "'JetBrains Mono', monospace", fontSize: '11px',
       boxShadow: '0 0 20px rgba(139,92,246,0.2)'
     }}>
-      <div style={{ color: '#8b5cf6', marginBottom: '4px' }}>{label || payload[0]?.name}</div>
-      <div style={{ color: '#f0f6fc', fontWeight: 700, fontSize: '14px' }}>{payload[0]?.value}</div>
+      <div style={{ color: 'var(--neon-purple)', marginBottom: '4px' }}>{label || payload[0]?.name}</div>
+      <div style={{ color: 'var(--text-primary)', fontWeight: 700, fontSize: '14px' }}>{payload[0]?.value}</div>
     </div>
   );
   return null;
@@ -116,7 +116,7 @@ export default function Dashboard() {
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '6px' }}>
           <LiveIndicator />
-          <div style={{ fontSize: '10px', color: '#30363d', fontFamily: 'JetBrains Mono' }}>
+          <div style={{ fontSize: '10px', color: 'var(--text-muted, #30363d)', fontFamily: 'JetBrains Mono' }}>
             {refreshing ? '⟳ REFRESHING...' : `UPDATED ${lastUpdated}`}
           </div>
           <button onClick={() => fetchAll()} style={{
@@ -169,8 +169,8 @@ export default function Dashboard() {
           <div className="chart-title">TICKETS BY PRIORITY</div>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={byPriority} barSize={32}>
-              <XAxis dataKey="priority" tick={{ fill: '#8b949e', fontSize: 11, fontFamily: 'JetBrains Mono' }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fill: '#8b949e', fontSize: 11 }} axisLine={false} tickLine={false} />
+              <XAxis dataKey="priority" tick={{ fill: 'var(--text-secondary)', fontSize: 11, fontFamily: 'JetBrains Mono' }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fill: 'var(--text-secondary)', fontSize: 11 }} axisLine={false} tickLine={false} />
               <Tooltip content={<CustomTooltip />} />
               <Bar dataKey="count" radius={[6, 6, 0, 0]}>
                 {byPriority.map((entry, i) => (
@@ -199,7 +199,7 @@ export default function Dashboard() {
               <AnimatedNumber value={item.value || 0} />
             </div>
             <div style={{ fontSize: '10px', color: item.color, fontFamily: 'JetBrains Mono', letterSpacing: '1px', margin: '6px 0' }}>{item.label}</div>
-            <div style={{ fontSize: '11px', color: '#30363d', fontFamily: 'JetBrains Mono' }}>{item.desc}</div>
+            <div style={{ fontSize: '11px', color: 'var(--text-muted, #30363d)', fontFamily: 'JetBrains Mono' }}>{item.desc}</div>
           </div>
         ))}
       </div>
@@ -211,7 +211,7 @@ export default function Dashboard() {
           <LiveIndicator />
         </div>
         {activity.length === 0 ? (
-          <div style={{ color: '#30363d', textAlign: 'center', padding: '32px', fontFamily: 'JetBrains Mono', fontSize: '12px', letterSpacing: '2px' }}>
+          <div style={{ color: 'var(--text-muted)', textAlign: 'center', padding: '32px', fontFamily: 'JetBrains Mono', fontSize: '12px', letterSpacing: '2px' }}>
             NO ACTIVITY — SUBMIT A TICKET TO BEGIN
           </div>
         ) : (
@@ -219,7 +219,7 @@ export default function Dashboard() {
             {activity.map((a, i) => (
               <div key={i} style={{
                 display: 'flex', alignItems: 'center', gap: '12px',
-                padding: '10px 0', borderBottom: '1px solid rgba(139,92,246,0.06)',
+                padding: '10px 0', borderBottom: '1px solid var(--border)',
                 animation: 'fadeIn 0.3s ease', opacity: 1
               }}>
                 <div style={{
@@ -232,12 +232,12 @@ export default function Dashboard() {
                     <span style={{ fontSize: '11px', fontFamily: 'JetBrains Mono', color: actionColor(a.action), letterSpacing: '1px' }}>
                       {a.action}
                     </span>
-                    <span style={{ color: '#30363d', fontSize: '11px' }}>#{a.ticket_id}</span>
-                    <span style={{ color: '#8b949e', fontSize: '11px', marginLeft: 'auto' }}>
+                    <span style={{ color: 'var(--text-muted, #30363d)', fontSize: '11px' }}>#{a.ticket_id}</span>
+                    <span style={{ color: 'var(--text-secondary)', fontSize: '11px', marginLeft: 'auto' }}>
                       {new Date(a.timestamp).toLocaleTimeString()}
                     </span>
                   </div>
-                  <div style={{ fontSize: '12px', color: '#8b949e', marginTop: '2px' }}>
+                  <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '2px' }}>
                     {a.performed_by} · {a.details?.substring(0, 60)}
                   </div>
                 </div>
